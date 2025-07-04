@@ -1,0 +1,203 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+/* Custom Components */
+.card {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200;
+}
+
+.btn-primary {
+  @apply px-4 py-2 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors;
+}
+
+.btn-secondary {
+  @apply px-4 py-2 bg-white text-gray-700 font-medium rounded-lg border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors;
+}
+
+.input {
+  @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent bg-white;
+}
+
+.input-field {
+  @apply input;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50;
+}
+
+.modal-content {
+  @apply bg-white rounded-lg shadow-xl max-h-[90vh] overflow-y-auto w-full max-w-md;
+}
+
+.modal-content-large {
+  @apply modal-content max-w-2xl;
+}
+
+.modal-content-xl {
+  @apply modal-content max-w-4xl;
+}
+
+/* Customer Card Styles */
+.customer-card {
+  @apply card p-6 hover:shadow-md transition-shadow duration-200 cursor-pointer;
+}
+
+.customer-avatar {
+  @apply w-16 h-16 rounded-full object-cover border-4 border-gray-200 shadow-sm;
+}
+
+.customer-avatar-placeholder {
+  @apply w-16 h-16 rounded-full flex items-center justify-center bg-gray-100 border-2 border-gray-200;
+}
+
+/* Status Badges */
+.status-badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.status-badge-paid {
+  @apply status-badge bg-green-100 text-green-800;
+}
+
+.status-badge-pending {
+  @apply status-badge bg-red-100 text-red-800;
+}
+
+.status-badge-partial {
+  @apply status-badge bg-yellow-100 text-yellow-800;
+}
+
+.status-badge-gst {
+  @apply status-badge bg-blue-100 text-blue-800;
+}
+
+.status-badge-non-gst {
+  @apply status-badge bg-gray-100 text-gray-800;
+}
+
+/* Stats Cards */
+.stats-card {
+  @apply card p-6 text-center;
+}
+
+/* Search Bar */
+.search-container {
+  @apply relative;
+}
+
+.search-input {
+  @apply input pl-10 pr-4 py-3 text-base rounded-lg;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  @apply bg-gray-900 text-white shadow-lg;
+}
+
+.sidebar-item {
+  @apply flex items-center px-6 py-3 text-gray-300 hover:text-white hover:bg-gray-800 transition-colors cursor-pointer;
+}
+
+.sidebar-item.active {
+  @apply text-white bg-gray-800;
+}
+
+/* Header Styles */
+.header {
+  @apply bg-white shadow-sm border-b border-gray-200;
+}
+
+.header-logo {
+  @apply flex items-center space-x-3 font-bold text-xl text-gray-900;
+}
+
+/* Table Styles */
+.table-container {
+  @apply bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200;
+}
+
+.table-header {
+  @apply bg-gray-50 border-b border-gray-200;
+}
+
+.table-row {
+  @apply border-b border-gray-100 hover:bg-gray-50 transition-colors;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  @apply animate-spin rounded-full border-2 border-gray-300 border-t-gray-900;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal-content {
+    @apply max-w-full m-4;
+  }
+  
+  .customer-card {
+    @apply p-4;
+  }
+  
+  .btn-primary, .btn-secondary {
+    @apply px-3 py-2 text-sm;
+  }
+}
+
+/* Custom Grid Columns for Jewelry Billing */
+.grid-cols-15 {
+  grid-template-columns: repeat(15, minmax(0, 1fr));
+}
+
+.grid-cols-16 {
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .card, .modal-content {
+    box-shadow: none !important;
+    border: 1px solid #e5e7eb !important;
+  }
+} 
