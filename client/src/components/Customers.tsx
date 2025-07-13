@@ -11,6 +11,8 @@ import toast from 'react-hot-toast';
 import { useNavigate, useLocation } from 'react-router-dom';
 import InvoiceDetailModal from './InvoiceDetailModal';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || '';
+
 const Customers: React.FC = () => {
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [loading, setLoading] = useState(true);
@@ -166,7 +168,7 @@ const Customers: React.FC = () => {
       is_gst: customer.is_gst || false
     });
     if (customer.image_url) {
-      setImagePreview(`http://localhost:5000${customer.image_url}`);
+      setImagePreview(`${API_BASE_URL}${customer.image_url}`);
     }
     setShowEditModal(true);
   };
@@ -427,7 +429,7 @@ const Customers: React.FC = () => {
                 <div className="flex items-center space-x-3">
                   {customer.image_url ? (
                     <img
-                      src={`http://localhost:5000${customer.image_url}`}
+                      src={`${API_BASE_URL}${customer.image_url}`}
                       alt={customer.name}
                       className="w-12 h-12 rounded-full object-cover border-2 border-gray-200"
                     />
@@ -1066,7 +1068,7 @@ const Customers: React.FC = () => {
               <div className="text-center">
                 {selectedCustomer.image_url ? (
                   <img
-                    src={`http://localhost:5000${selectedCustomer.image_url}`}
+                    src={`${API_BASE_URL}${selectedCustomer.image_url}`}
                     alt={selectedCustomer.name}
                     className="w-24 h-24 rounded-full object-cover mx-auto border-2 border-gray-200"
                   />

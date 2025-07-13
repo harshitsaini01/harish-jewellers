@@ -8,6 +8,8 @@ import {
 import toast from 'react-hot-toast';
 import InvoiceDetailModal from './InvoiceDetailModal';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || '';
+
 const Udhaar: React.FC = () => {
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [loading, setLoading] = useState(true);
@@ -230,7 +232,7 @@ const Udhaar: React.FC = () => {
                     <div className="flex items-center space-x-4">
                       {customer.image_url ? (
                         <img
-                          src={`http://localhost:5000${customer.image_url}`}
+                          src={`${API_BASE_URL}${customer.image_url}`}
                           alt={customer.name}
                           className="w-12 h-12 rounded-full object-cover border-2 border-gray-200"
                         />

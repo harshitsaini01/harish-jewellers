@@ -13,7 +13,7 @@ require('dotenv').config();
 const { db, initializeDatabase } = require('./database');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 7070;
 const JWT_SECRET = process.env.JWT_SECRET || 'harish_jewellers_secret_key_2024';
 
 // Security middleware

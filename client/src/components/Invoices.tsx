@@ -276,8 +276,8 @@ const Invoices: React.FC = () => {
                 <th style="border: 1px solid black; padding: 8px 4px; background-color: #f5f5f5; font-weight: bold; text-align: center;">Purity</th>
                 <th style="border: 1px solid black; padding: 8px 4px; background-color: #f5f5f5; font-weight: bold; text-align: center;">N.Wt.</th>
                 <th style="border: 1px solid black; padding: 8px 4px; background-color: #f5f5f5; font-weight: bold; text-align: center;">Pcs</th>
-                ${invoice.items && invoice.items.some((item) => item.add_weight && item.add_weight > 0) ? '<th style="border: 1px solid black; padding: 8px 4px; background-color: #f5f5f5; font-weight: bold; text-align: center;">Polish (gm)</th>' : ''}
-                ${invoice.items && invoice.items.some((item) => item.making_charges && item.making_charges > 0) ? '<th style="border: 1px solid black; padding: 8px 4px; background-color: #f5f5f5; font-weight: bold; text-align: center;">Mk Ch.(%)</th>' : ''}
+                ${invoice.items && invoice.items.some((item: import('../types').InvoiceItem) => item.add_weight && item.add_weight > 0) ? '<th style="border: 1px solid black; padding: 8px 4px; background-color: #f5f5f5; font-weight: bold; text-align: center;">Polish (gm)</th>' : ''}
+                ${invoice.items && invoice.items.some((item: import('../types').InvoiceItem) => item.making_charges && item.making_charges > 0) ? '<th style="border: 1px solid black; padding: 8px 4px; background-color: #f5f5f5; font-weight: bold; text-align: center;">Mk Ch.(%)</th>' : ''}
                 <th style="border: 1px solid black; padding: 8px 4px; background-color: #f5f5f5; font-weight: bold; text-align: center;">Rate</th>
                 <th style="border: 1px solid black; padding: 8px 4px; background-color: #f5f5f5; font-weight: bold; text-align: center;">Labour</th>
                 <th style="border: 1px solid black; padding: 8px 4px; background-color: #f5f5f5; font-weight: bold; text-align: center;">Discount</th>
@@ -285,7 +285,7 @@ const Invoices: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              ${invoice.items?.map((item, index) => `
+              ${invoice.items?.map((item: import('../types').InvoiceItem, index: number) => `
                 <tr>
                   <td style="border: 1px solid black; padding: 8px 4px; text-align: center;">${index + 1}</td>
                   <td style="border: 1px solid black; padding: 8px 4px;">${item.item_name}</td>
@@ -293,9 +293,9 @@ const Invoices: React.FC = () => {
                   <td style="border: 1px solid black; padding: 8px 4px; text-align: center;">${item.stamp}</td>
                   <td style="border: 1px solid black; padding: 8px 4px; text-align: right;">${item.gross_weight.toFixed(3)}</td>
                   <td style="border: 1px solid black; padding: 8px 4px; text-align: center;">${item.pc}</td>
-                  ${invoice.items && invoice.items.some((itm) => itm.add_weight && itm.add_weight > 0) ? 
+                  ${invoice.items && invoice.items.some((itm: import('../types').InvoiceItem) => itm.add_weight && itm.add_weight > 0) ? 
                     `<td style="border: 1px solid black; padding: 8px 4px; text-align: right;">${item.add_weight && item.add_weight > 0 ? item.add_weight.toFixed(3) : '-'}</td>` : ''}
-                  ${invoice.items && invoice.items.some((itm) => itm.making_charges && itm.making_charges > 0) ? 
+                  ${invoice.items && invoice.items.some((itm: import('../types').InvoiceItem) => itm.making_charges && itm.making_charges > 0) ? 
                     `<td style="border: 1px solid black; padding: 8px 4px; text-align: right;">${item.making_charges && item.making_charges > 0 ? item.making_charges.toFixed(2) + '%' : '-'}</td>` : ''}
                   <td style="border: 1px solid black; padding: 8px 4px; text-align: right;">${item.rate.toFixed(2)}</td>
                   <td style="border: 1px solid black; padding: 8px 4px; text-align: right;">${formatCurrency(item.labour)}</td>
@@ -510,7 +510,11 @@ const Invoices: React.FC = () => {
         });
       } catch (error) {
         console.error('PDF generation error:', error);
-        reject(new Error(`PDF generation failed: ${error.message}`));
+        if (error instanceof Error) {
+          reject(new Error(`PDF generation failed: ${error.message}`));
+        } else {
+          reject(new Error('PDF generation failed: Unknown error'));
+        }
       }
     });
   };
@@ -580,7 +584,11 @@ const Invoices: React.FC = () => {
           
         } catch (error) {
           console.error(`Error processing invoice ${invoice.invoice_number}:`, error);
-          toast.error(`Failed to process invoice ${invoice.invoice_number}: ${error.message || 'Unknown error'}`, { duration: 3000 });
+          if (error instanceof Error) {
+            toast.error(`Failed to process invoice ${invoice.invoice_number}: ${error.message || 'Unknown error'}`, { duration: 3000 });
+          } else {
+            toast.error(`Failed to process invoice ${invoice.invoice_number}: Unknown error`, { duration: 3000 });
+          }
           errorCount++;
         }
       }
@@ -694,7 +702,11 @@ For support, contact: 9837408824
       
     } catch (error) {
       console.error('Export error:', error);
-      toast.error(`Failed to export invoice PDFs: ${error.message || 'Unknown error'}`, { id: 'export-progress' });
+      if (error instanceof Error) {
+        toast.error(`Failed to export invoice PDFs: ${error.message || 'Unknown error'}`, { id: 'export-progress' });
+      } else {
+        toast.error('Failed to export invoice PDFs: Unknown error', { id: 'export-progress' });
+      }
     } finally {
       setIsExporting(false);
     }
