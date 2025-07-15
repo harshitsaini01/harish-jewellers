@@ -149,9 +149,9 @@ const InvoiceDetailModal: React.FC<InvoiceDetailModalProps> = ({ invoiceId, onCl
             </div>
             <div class="company-details">Reg. Address:- Rao Market, Sabzi Mandi, Chhutmalpur, Saharanpur- 247662</div>
             <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 12px;">
-              <div>
+              <div style="text-align: left;">
                 <div>Mob No:-9837408824 Uday Shankar Rastogi (Babbu)</div>
-                <div>9012000183 Tushar Rastogi</div>
+                <div>Mob No:-9012000183 Tushar Rastogi (Tus)</div>
               </div>
               <div style="text-align: center;">
                 <div style="font-size: 10px; margin-bottom: 5px;">
