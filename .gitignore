@@ -19,9 +19,7 @@ client/.env
 server/.env
 
 # Database files
-server/data/*.db
-server/data/*.db-shm
-server/data/*.db-wal
+server/data/
 server/database.db
 server/database.sqlite
 server/jewelry_store.db
