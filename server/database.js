@@ -329,43 +329,51 @@ const initializeDatabase = async () => {
                 });
               }
 
-              // Create default admin user if not exists
-              db.get('SELECT * FROM users WHERE username = ?', ['admin'], (err, user) => {
-                if (err) {
-                  console.error('Error checking for admin user:', err);
-                  reject(err);
-                  return;
-                }
+              // Removed auto-creation of admin user from environment variables for security. Admin users must now be managed manually in the database.
+              // const adminUsername = process.env.ADMIN_USERNAME;
+              // const adminPassword = process.env.ADMIN_PASSWORD;
+              // db.get('SELECT * FROM users WHERE username = ?', [adminUsername], (err, user) => {
+              //   if (err) {
+              //     console.error('Error checking for admin user:', err);
+              //     reject(err);
+              //     return;
+              //   }
 
-                if (!user) {
-                  const hashedPassword = bcrypt.hashSync('admin123', 10);
-                  db.run(
-                    'INSERT INTO users (username, password, role) VALUES (?, ?, ?)',
-                    ['admin', hashedPassword, 'admin'],
-                    (err) => {
-                      if (err) {
-                        console.error('Error creating admin user:', err);
-                        reject(err);
-                      } else {
-                        console.log('Default admin user created');
-                        console.log('Database initialized successfully');
-                        
-                        // Add mock data for development
-                        addMockData();
-                        
-                        resolve();
-                      }
-                    }
-                  );
-                } else {
-                  console.log('Database initialized successfully');
-                  
-                  // Add mock data for development
-                  addMockData();
-                  
-                  resolve();
-                }
-              });
+              //   if (!user) {
+              //     const hashedPassword = bcrypt.hashSync(adminPassword, 10);
+              //     db.run(
+              //       'INSERT INTO users (username, password, role) VALUES (?, ?, ?)',
+              //       [adminUsername, hashedPassword, 'admin'],
+              //       (err) => {
+              //         if (err) {
+              //           console.error('Error creating admin user:', err);
+              //           reject(err);
+              //         } else {
+              //           console.log('Admin user created');
+              //           console.log('Database initialized successfully');
+                      
+              //           // Add mock data for development
+              //           addMockData();
+                      
+              //           resolve();
+              //         }
+              //       }
+              //     );
+              //   } else {
+              //     console.log('Database initialized successfully');
+                      
+              //     // Add mock data for development
+              //     addMockData();
+                      
+              //     resolve();
+              //   }
+              // });
+              console.log('Database initialized successfully');
+              
+              // Add mock data for development
+              addMockData();
+              
+              resolve();
             });
           });
         });

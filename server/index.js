@@ -1442,7 +1442,6 @@ if (process.env.NODE_ENV === 'production') {
 initializeDatabase().then(() => {
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-    console.log('Default login: username=admin, password=admin123');
   });
 }).catch(err => {
   console.error('Failed to initialize database:', err);

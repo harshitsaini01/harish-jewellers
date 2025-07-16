@@ -62,8 +62,8 @@ The application will be available at:
 - **Backend API**: http://localhost:5000
 
 ### 3. Default Login Credentials
-- **Username**: admin
-- **Password**: admin123
+- **Username**: ***********
+- **Password**: ***********
 
 ## Project Structure
 

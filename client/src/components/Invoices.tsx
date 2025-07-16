@@ -239,7 +239,7 @@ const Invoices: React.FC = () => {
             <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 12px;">
               <div style="text-align: left;">
                 <div>Mob No:-9837408824 Uday Shankar Rastogi (Babbu)</div>
-                <div>Mob No:-9012000183 Tushar Rastogi (Tus)</div>
+                <div>Mob No:-9012000183 Tushar Rastogi </div>
               </div>
 
               <div style="text-align: center;">
